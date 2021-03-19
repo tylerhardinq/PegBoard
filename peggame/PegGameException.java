@@ -1,8 +1,8 @@
 package peggame;
-import java.lang.Exception;
 
-public class PegGameException {
+
+public class PegGameException extends java.lang.Exception{
     public PegGameException(String message){
-        Exception(String message);
+       throw new Exception(String message);   
     }
 }
