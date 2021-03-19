@@ -8,7 +8,7 @@ public interface PegGame {
     GameState getGameState();
 
 
-    default void makeMove(Move move) {
-        throw new PegGameException();
+    default void makeMove(Move move) throws PegGameException {
+        throw new PegGameException("the method has not been implemented");
     }
 }
