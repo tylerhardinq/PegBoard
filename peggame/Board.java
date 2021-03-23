@@ -56,7 +56,10 @@ public class Board {
         for(int row=0; row<rows; row++) {
             for(int col=0; col<cols; col++) {
                 builder.append("[");
-                builder.append(String.format("%1d", board[row][col]));
+                if(board[row][col] == null){
+                    builder.append("o");
+                }
+               
                 builder.append("]");
             }
             builder.append("\n");
