@@ -1,9 +1,6 @@
 package peggame;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -11,7 +8,7 @@ public class Board implements PegGame{
 
     private final int rows;
     private final int cols;
-    private final String[][] board;
+    protected final String[][] board;
     private int moves;   //total moves
     private int totalPeg; //total number of pigs on the board
     private GameState state; //The current state of the game
@@ -110,55 +107,11 @@ public class Board implements PegGame{
         return builder.toString();
     }
 
-    public static Board readFromFile(String filename) throws FileNotFoundException {
-        FileReader fr = new FileReader(filename);
-        BufferedReader br = new BufferedReader(fr);
-        try {
-            String[] rowCol = br.readLine().split(" ");
-            int row;
-            int col;
-            //If row and col is different
-            if(rowCol.length > 1) {
-                row = Integer.parseInt(rowCol[0]);
-                col = Integer.parseInt(rowCol[1]);
-            }
-            //If row and col is same
-            else{
-                row = Integer.parseInt(rowCol[0]);
-                col = Integer.parseInt(rowCol[0]);
-            }
-            //Create new board
-            Board filledBoard = new Board(row , col);
-            String line = "";
-            while(line != null) {
-                for(int r = 0; r < row; r++) {
-                    line = br.readLine();
-                    String[] tokens =line.split("");
-                    for(int c = 0; c < col; c++) {
-                        //add each element
-                        filledBoard.board[r][c] = tokens[c] ;
-                    }
-                }
-                br.close();
-                return filledBoard;
-            }
-
-        }
-
-        catch (IOException ioe) {
-            System.out.println(ioe);
-        }
-        return null;
-
-    }
-
-
     public static void main(String[] args) throws FileNotFoundException {
         // Board board = new Board(4, 4);
         // board.makeMove(5, 7);
         // System.out.println(board);
-        System.out.println(readFromFile("data/3_3.txt"));
-        System.out.println(readFromFile("data/4_5.txt"));
+        
 
     }
     
