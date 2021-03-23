@@ -96,7 +96,7 @@ public class Board implements PegGame{
         for(int row=0; row<rows; row++) {
             for(int col=0; col<cols; col++) {
                 builder.append("[");
-                if(board[row][col] == "."){
+                if(board[row][col].equals(".")){
                     builder.append("-"); 
                 }
                 else{
@@ -115,30 +115,37 @@ public class Board implements PegGame{
         BufferedReader br = new BufferedReader(fr);
         try {
             String[] rowCol = br.readLine().split(" ");
-            if(rowCol.length != 1) {
-                int row = Integer.parseInt(rowCol[0]);
-                int col = Integer.parseInt(rowCol[1]);
-                Board filledBoard = new Board(row , col);
-                // fill the board 
-                String line = "";
-                while(line != null) {
-                    for(int r = 0; r < row; r++) {
-                        line = br.readLine();
-                        String[] a =line.split("");
-                        for(int c = 0; c < col; c++) {
-                            filledBoard.board[r][c] = a[c] ;
-                        }
+            int row;
+            int col;
+            //If row and col is different
+            if(rowCol.length > 1) {
+                row = Integer.parseInt(rowCol[0]);
+                col = Integer.parseInt(rowCol[1]);
+            }
+            //If row and col is same
+            else{
+                row = Integer.parseInt(rowCol[0]);
+                col = Integer.parseInt(rowCol[0]);
+            }
+            //Create new board
+            Board filledBoard = new Board(row , col);
+            String line = "";
+            while(line != null) {
+                for(int r = 0; r < row; r++) {
+                    line = br.readLine();
+                    String[] tokens =line.split("");
+                    for(int c = 0; c < col; c++) {
+                        //add each element
+                        filledBoard.board[r][c] = tokens[c] ;
                     }
-                    return filledBoard;
-                    // Still need to make an else for if the row and col are different.
                 }
                 br.close();
-
+                return filledBoard;
             }
 
-            
+        }
 
-        } catch (IOException ioe) {
+        catch (IOException ioe) {
             System.out.println(ioe);
         }
         return null;
@@ -147,10 +154,11 @@ public class Board implements PegGame{
 
 
     public static void main(String[] args) throws FileNotFoundException {
-        Board board = new Board(4, 4);
+        // Board board = new Board(4, 4);
         // board.makeMove(5, 7);
         // System.out.println(board);
         System.out.println(readFromFile("data/3_3.txt"));
+        System.out.println(readFromFile("data/4_5.txt"));
 
     }
     
