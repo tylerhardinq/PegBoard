@@ -1,5 +1,8 @@
 package peggame;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -16,7 +19,7 @@ public class Board implements PegGame{
         this.rows = rows;
         this.cols = cols;
         this.board = new String[rows][cols];
-        board[0][0] = "-";
+        // board[0][0] = "-";
         moves = 0;
         this.totalPeg = (rows * cols)-1;
         this.state = GameState.NOT_STARTED;
@@ -106,11 +109,52 @@ public class Board implements PegGame{
         return builder.toString();
     }
 
+    public static Board readFromFile(String filename) {
+        try {
+            FileReader fr = new FileReader(filename);
+            BufferedReader br = new BufferedReader(fr);
+            String[] rowCol = br.readLine().split(" ");
+            if(rowCol.length != 1) {
+                int row = Integer.parseInt(rowCol[0]);
+                int col = Integer.parseInt(rowCol[1]);
+                Board filledBoard = new Board(row , col);
+                // fill the board 
+                String line = "";
+                while(line != null) {
+                    line = br.readLine();
+                    if(line == null) {break;}
+                    for(int r = 0; r < row; r++) {
+                        for(int c = 0; c < col; c++) {
+                            if(line.split("")[c].equals(".")) {
+                                filledBoard.board[r][c] = "-";
+                            }
+                            if(line.split("")[c].equals("o")) {
+                                filledBoard.board[r][c] = "o";
+                            }
+                        }
+                    }
+                    // Still need to make an else for if the row and col are different.
+                }
+                br.close();
+                return filledBoard;
+            }
+
+            
+
+        } catch (IOException ioe) {
+            System.out.println(ioe);
+        }
+        return null;
+
+    }
+
 
     public static void main(String[] args) {
         Board board = new Board(4, 4);
         // board.makeMove(5, 7);
         System.out.println(board);
+        System.out.println(readFromFile("data/3_3.txt"));
+
     }
     
 }
