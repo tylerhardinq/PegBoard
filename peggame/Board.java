@@ -7,14 +7,14 @@ public class Board {
     private final int rows;
     private final int cols;
 
-    private final int[][] board;
+    private final String[][] board;
 
     private int moves;
 
     public Board(int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
-        this.board = new int[rows][cols];
+        this.board = new String[rows][cols];
         moves = 0;
     }
 
@@ -22,7 +22,7 @@ public class Board {
         this.rows = template.rows;
         this.cols = template.cols;
 
-        this.board = new int[rows][];
+        this.board = new String[rows][];
         for(int row=0; row<rows; row++) {
             this.board[row] = Arrays.copyOf(template.board[row], rows);
         }
@@ -33,11 +33,11 @@ public class Board {
     public boolean makeMove(int row, int col) {
         if(row < 0 || row >= rows
             || col < 0 || col >= cols
-            || board[row][col] != 0) {
+            || board[row][col] != "-") {
             return false;
         } else {
             moves++;
-            board[row][col] = moves;
+            board[row][col] = "o";
             return true;
         }
     }
@@ -56,12 +56,19 @@ public class Board {
         for(int row=0; row<rows; row++) {
             for(int col=0; col<cols; col++) {
                 builder.append("[");
-                builder.append(String.format("%3d", board[row][col]));
+                builder.append(String.format("%1d", board[row][col]));
                 builder.append("]");
             }
             builder.append("\n");
         }
         return builder.toString();
+    }
+
+
+    public static void main(String[] args) {
+        Board board = new Board(8, 8);
+        board.makeMove(5, 7);
+        System.out.println(board);
     }
     
 }
