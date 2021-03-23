@@ -49,34 +49,30 @@ public class Game implements PegGame{
                 for(int c = 0; c < board.getCols(); c++) {
                    if(board.board[r][c].equals(".")){
                         To.add(new Location(r, c));
-                        System.out.println(r +" " + c);
                    }
                 }
             }
         }
         for(Location i : To){
-             System.out.println(i);;
-            // for(int j = 0; j < innerCol.length; j++) {
+            for(int j = 0; j < innerCol.length; j++) {
                 
-            //     int nextOuterR = i.getRow() + outerRow[j];
-            //     int nextOuterC = i.getCol() + outerCol[j];
-            //     int nextInnerR = i.getRow() + innerRow[j];
-            //     int nextInnerC = i.getCol() + innerRow[j];
+                int nextOuterR = i.getRow() + outerRow[j];
+                int nextOuterC = i.getCol() + outerCol[j];
+                int nextInnerR = i.getRow() + innerRow[j];
+                int nextInnerC = i.getCol() + innerCol[j];
 
-            //     Location nextOuterLocation = new Location(nextOuterR, nextOuterC);
-            //     Location nextInnerLocation = new Location(nextInnerR, nextInnerC);
+                Location nextOuterLocation = new Location(nextOuterR, nextOuterC);
+                Location nextInnerLocation = new Location(nextInnerR, nextInnerC);
                 
                 
-            //     if(isValid(nextOuterLocation) && hasPeg(nextOuterLocation)) {
-                    
-            //         if(hasPeg(nextInnerLocation)) {
-            //         Move move = new Move(nextOuterLocation, i);
-            //         possibleMoves.add(move);
-            //         }
-            //     }
-        //     }
-        // }
+                if(isValid(nextOuterLocation) && hasPeg(nextOuterLocation)) {
+                    if(isValid(nextInnerLocation) && hasPeg(nextInnerLocation)) {
+                        Move move = new Move(nextOuterLocation, i);
+                        possibleMoves.add(move);
+                    }
+                }
             }
+        }
         return possibleMoves;
     }
 
@@ -105,7 +101,8 @@ public class Game implements PegGame{
     }
     
     public static void main(String[] args) throws FileNotFoundException {
-        Game game = new Game(new BoardFromFile().readFromFile("data/4_4.txt"));
+        new BoardFromFile();
+        Game game = new Game(BoardFromFile.readFromFile("data/4_4.txt"));
         System.out.println(game.board);
 
         System.out.println(game.getPossibleMoves());

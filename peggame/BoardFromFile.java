@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class BoardFromFile {
-    public Board readFromFile(String filename) throws FileNotFoundException {
+    public static Board readFromFile(String filename) throws FileNotFoundException {
         FileReader fr = new FileReader(filename);
         BufferedReader br = new BufferedReader(fr);
         try {
@@ -49,5 +49,11 @@ public class BoardFromFile {
         }
         return null;
 
+    }
+
+    public static void main(String[] args) throws FileNotFoundException {
+        Board b = BoardFromFile.readFromFile("data/3_3.txt");
+        System.out.println(b);
+        System.out.println(b.board[2][0]);
     }
 }

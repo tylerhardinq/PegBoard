@@ -27,4 +27,9 @@ public class Move {
         return(from == other.from && to == other.to);
     
     }
+
+    @Override
+    public String toString() {
+        return "Move{ from:" + from.toString() + ", to:"+ to.toString() + "}";
+    }
 }
