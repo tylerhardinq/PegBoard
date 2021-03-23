@@ -35,7 +35,7 @@ public class Board implements PegGame{
     }
 
     public boolean moveValid(Move move){
-
+        return false;
     }
     @Override
     public void makeMove(Move move) {
@@ -73,13 +73,13 @@ public class Board implements PegGame{
     
     @Override 
     public GameState getGameState(){
-        return null;
+        return state;
 
     }
 
-
-
-
+    public int getTotalPeg() {
+        return totalPeg;
+    }
 
     public int getMoves() {
         return moves;
@@ -108,7 +108,7 @@ public class Board implements PegGame{
 
 
     public static void main(String[] args) {
-        Board board = new Board(8, 8);
+        Board board = new Board(4, 4);
         // board.makeMove(5, 7);
         System.out.println(board);
     }
