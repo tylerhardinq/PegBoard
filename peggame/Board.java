@@ -22,7 +22,7 @@ public class Board {
         this.board = new String[rows][cols];
         // board[0][0] = "-";
         moves = 0;
-        this.totalPeg = (rows * cols)-1;
+        this.totalPeg = 0;
         this.state = GameState.NOT_STARTED;
     }
 
@@ -46,9 +46,14 @@ public class Board {
         return state;
     }
 
+    public void addPeg() {
+        this.totalPeg += 1;
+    }
+
     public int getTotalPeg() {
         return totalPeg;
     }
+
     public int getCols() {
         return cols;
     }

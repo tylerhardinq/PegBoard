@@ -32,6 +32,9 @@ public class BoardFromFile {
                     String[] tokens =line.split("");
                     for(int c = 0; c < col; c++) {
                         //add each element
+                        if(tokens[c].equals("o")) {
+                            filledBoard.addPeg();
+                        }
                         filledBoard.board[r][c] = tokens[c] ;
                     }
                 }

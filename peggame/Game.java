@@ -1,5 +1,6 @@
 package peggame;
 
+import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,21 +36,67 @@ public class Game implements PegGame{
 
     @Override
     public Collection<Move> getPossibleMoves() {
+        
+        Collection<Move> possibleMoves = new LinkedList<>();
         List<Location> To = new LinkedList<>();
-        int[] rowB = {0, 0, 1, 2, 1, 2, 1, 2, 0, 0, -1, -2, -1, -2, -1, -2};
-        int[] colB = {1, 2, 1, 2, 0, 0, -1, -2, -1, -2, -1, -2, 0, 0, 1, 2};
+        int[] innerRow = {0, 1, 1,  1,  0, -1, -1, -1};
+        int[] innerCol = {1, 1, 0, -1, -1, -1,  0,  1};
+        int[] outerRow = {0, 2, 2, 2,   0, -2, -2, -2};
+        int[] outerCol = {2, 2, 0, -2, -2, -2,  0,  2};
+        
         if(board.getTotalPeg() != 1){
             for(int r = 0; r < board.getRows(); r++) {
                 for(int c = 0; c < board.getCols(); c++) {
-                   if(board.board[r][c].equals("-")){
+                   if(board.board[r][c].equals(".")){
                         To.add(new Location(r, c));
+                        System.out.println(r +" " + c);
                    }
                 }
             }
         }
         for(Location i : To){
-            System.out.println(i);;
+             System.out.println(i);;
+            // for(int j = 0; j < innerCol.length; j++) {
+                
+            //     int nextOuterR = i.getRow() + outerRow[j];
+            //     int nextOuterC = i.getCol() + outerCol[j];
+            //     int nextInnerR = i.getRow() + innerRow[j];
+            //     int nextInnerC = i.getCol() + innerRow[j];
+
+            //     Location nextOuterLocation = new Location(nextOuterR, nextOuterC);
+            //     Location nextInnerLocation = new Location(nextInnerR, nextInnerC);
+                
+                
+            //     if(isValid(nextOuterLocation) && hasPeg(nextOuterLocation)) {
+                    
+            //         if(hasPeg(nextInnerLocation)) {
+            //         Move move = new Move(nextOuterLocation, i);
+            //         possibleMoves.add(move);
+            //         }
+            //     }
+        //     }
+        // }
+            }
+        return possibleMoves;
+    }
+
+
+
+    public boolean hasPeg(Location location) {
+        if(board.board[location.getRow()][location.getCol()].equals("o")) {
+            return true;
         }
+        return false;
+    }
+
+    public boolean isValid(Location loc) {
+        if(loc.getRow() < 0 || loc.getRow() >= board.getRows()) {
+            return false;
+        }
+        if(loc.getCol() < 0 || loc.getCol() >= board.getCols()) {
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -57,4 +104,10 @@ public class Game implements PegGame{
         return board.getState();
     }
     
+    public static void main(String[] args) throws FileNotFoundException {
+        Game game = new Game(new BoardFromFile().readFromFile("data/4_4.txt"));
+        System.out.println(game.board);
+
+        System.out.println(game.getPossibleMoves());
+    }
 }

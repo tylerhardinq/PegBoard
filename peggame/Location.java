@@ -27,4 +27,9 @@ public class Location{
         return(row == other.row && col == other.col);
       
     }
+
+    @Override
+    public String toString() {
+        return "Row: " + row + " Column: " + col;
+    }
 }
