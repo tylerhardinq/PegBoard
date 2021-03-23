@@ -41,40 +41,7 @@ public class Board implements PegGame{
     public boolean moveValid(Move move){
         return false;
     }
-    @Override
-    public void makeMove(Move move) {
-        //what makes it valid?
-
-        /**
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         */
-
-
-
-
-
-
-        // if(move.getTo()row < 0 || row >= rows
-        //     || col < 0 || col >= cols
-        //     || board[row][col] != "-") {
-        //     return false;
-        // } else {
-        //     moves++;
-        //     board[row][col] = "o";
-        //     totalPeg--;
-        //     return true;
-        // }
-    }
-    @Override 
-    public Collection<Move> getPossibleMoves(){
-        return null;
-    }
-    
+   
     @Override 
     public GameState getGameState(){
         return state;
