@@ -104,7 +104,6 @@ public class Game implements PegGame{
         new BoardFromFile();
         Game game = new Game(BoardFromFile.readFromFile("data/4_4.txt"));
         System.out.println(game.board);
-
         System.out.println(game.getPossibleMoves());
     }
 }
