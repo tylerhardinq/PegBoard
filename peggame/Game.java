@@ -22,6 +22,8 @@ public class Game implements PegGame{
             int y2 = move.getTo().getCol();
             int x = (x1+x2)/2;
             int y = (y1+y2)/2;
+            System.out.println(x);
+            System.out.println(y);
             board.board[x][y] = "-";
         }
         else{
@@ -99,10 +101,12 @@ public class Game implements PegGame{
         return board.getState();
     }
     
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, PegGameException {
         new BoardFromFile();
         Game game = new Game(BoardFromFile.readFromFile("data/4_4.txt"));
         System.out.println(game.board);
         System.out.println(game.getPossibleMoves());
+        game.makeMove(new Move(new Location(3,2), new Location(3,0)));
+        System.out.println(game.board);
     }
 }
