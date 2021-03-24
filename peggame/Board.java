@@ -50,6 +50,10 @@ public class Board {
         this.totalPeg += 1;
     }
 
+    public void removePeg() {
+        totalPeg--;
+    }
+
     public int getTotalPeg() {
         return totalPeg;
     }
@@ -63,6 +67,10 @@ public class Board {
 
     public int getMoves() {
         return moves;
+    }
+
+    public void addMove() {
+        moves++;
     }
 
     public void setState(GameState state) {
@@ -85,7 +93,9 @@ public class Board {
                 builder.append("]");
             }
             builder.append("\n");
+            
         }
+        builder.append(state + "\n");
         return builder.toString();
     }
 

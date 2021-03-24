@@ -14,22 +14,32 @@ public class Game implements PegGame{
     
     @Override
     public void makeMove(Move move) throws PegGameException {
-        System.out.println(getPossibleMoves().contains(move));
-        // if(getPossibleMoves().contains(move)){
-        //     board.board[move.getTo().getRow()][move.getTo().getCol()] = "o";
-        //     int x1 = move.getFrom().getRow();
-        //     int x2 = move.getTo().getRow();
-        //     int y1 = move.getFrom().getCol();
-        //     int y2 = move.getTo().getCol();
-        //     int x = (x1+x2)/2;
-        //     int y = (y1+y2)/2;
-        //     System.out.println(x);
-        //     System.out.println(y);
-        //     board.board[x][y] = "-";
-        // }
-        // else{
-        //     throw new PegGameException("invalid move haha ");
-        // }
+        if(getPossibleMoves().contains(move)){
+            board.board[move.getTo().getRow()][move.getTo().getCol()] = "o";
+            board.board[move.getFrom().getRow()][move.getFrom().getCol()] = ".";
+
+            int x1 = move.getFrom().getRow();
+            int x2 = move.getTo().getRow();
+            int y1 = move.getFrom().getCol();
+            int y2 = move.getTo().getCol();
+            int x = (x1+x2)/2;
+            int y = (y1+y2)/2;
+            board.board[x][y] = ".";
+            board.addMove();
+            board.removePeg();
+
+            if(getPossibleMoves().size() == 0 && board.getTotalPeg() == 1) {
+                board.setState(GameState.WON);
+            } else if(board.getTotalPeg() >= 2 && getPossibleMoves().size() == 0) {
+                board.setState(GameState.STALEMATE);
+            } else {
+                board.setState(GameState.IN_PROGRESS);
+            }
+            
+        }
+        else{
+            throw new PegGameException("invalid move haha ");
+        }
     }
     
     public Board getBoard() {
@@ -75,6 +85,7 @@ public class Game implements PegGame{
                 }
             }
         }
+        
         return possibleMoves;
     }
 

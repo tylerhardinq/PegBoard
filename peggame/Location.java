@@ -30,6 +30,6 @@ public class Location{
 
     @Override
     public String toString() {
-        return "Row: " + row + " Column: " + col;
+        return "(" + row + ", " + col + ")";
     }
 }

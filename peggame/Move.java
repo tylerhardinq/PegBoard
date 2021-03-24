@@ -19,17 +19,17 @@ public class Move {
     
     public boolean equals(Object o) {
         if (!(o instanceof Move)) {
-        return false;
+            return false;
         }
     
         Move other = (Move)o;
     
-        return(from == other.from && to == other.to);
-    
+        return(from.equals(other.from) && to.equals(other.to));
     }
+    
 
     @Override
     public String toString() {
-        return "Move{ from:" + from.toString() + ", to:"+ to.toString() + "}";
+        return "Move from " + from.toString() + " to "+ to.toString();
     }
 }
