@@ -13,21 +13,20 @@ public class Game implements PegGame{
     }
     
     @Override
-    public void makeMove(Move move) {
-        //what makes it valid?
-
-
-
-        // if(move.getTo()row < 0 || row >= rows
-        //     || col < 0 || col >= cols
-        //     || board[row][col] != "-") {
-        //     return false;
-        // } else {
-        //     moves++;
-        //     board[row][col] = "o";
-        //     totalPeg--;
-        //     return true;
-        // }
+    public void makeMove(Move move) throws PegGameException {
+        if(getPossibleMoves().contains(move)){
+            board.board[move.getTo().getRow()][move.getTo().getCol()] = "o";
+            int x1 = move.getFrom().getRow();
+            int x2 = move.getTo().getRow();
+            int y1 = move.getFrom().getCol();
+            int y2 = move.getTo().getCol();
+            int x = (x1+x2)/2;
+            int y = (y1+y2)/2;
+            board.board[x][y] = "-";
+        }
+        else{
+            throw new PegGameException("invalid move haha ");
+        }
     }
     
     public Board getBoard() {

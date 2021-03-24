@@ -2,7 +2,7 @@ package peggame;
 import java.util.Scanner;
 
 public class CommandLines {
-    public static void CLI(Game game) {
+    public static void CLI(Game game) throws PegGameException {
         Scanner sc = new Scanner(System.in);
         boolean flag = true;
 
