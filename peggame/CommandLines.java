@@ -36,7 +36,10 @@ public class CommandLines {
         if(tokens[0].equals("move") && tokens.length == 5) {
             Location from = new Location(Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]));
             Location to = new Location(Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]));
-            game.makeMove(new Move(from, to));
+            Move move = new Move(from, to);
+            System.out.println(move);
+            game.makeMove(move);
+            
         }
 
 
