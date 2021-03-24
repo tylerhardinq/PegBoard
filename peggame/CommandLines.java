@@ -16,10 +16,11 @@ public class CommandLines {
             System.out.println("move r1 c1 r2 c2 - attempts to move a peg from r1 c1 to r2 c2 on the board.");
             System.out.println("hint - displays an available move.");
             System.out.println("quit - quits the game");
+            System.out.println();
         }
 
         if(input.equals("hint")) {
-            System.out.println(game.getPossibleMoves());
+            System.out.println(game.getPossibleMoves().iterator().next());
         }
 
         if(input.equals("quit")) {
@@ -41,5 +42,6 @@ public class CommandLines {
 
 
     }
+    sc.close();
 }
 }

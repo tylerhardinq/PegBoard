@@ -9,10 +9,8 @@ public class Project1Main{
         System.out.print("Give me a file ");
         String fileName = sc.nextLine();
         Board aBoard = BoardFromFile.readFromFile(fileName);
-        System.out.println(aBoard);
         Game aGame = new Game(aBoard);
         CommandLines.CLI(aGame);
-
-
+        sc.close();
     }
 }
