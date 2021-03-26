@@ -1,7 +1,9 @@
 package peggame;
-
+/**
+ * the enum class of game state
+ */
 public enum GameState {
-    NOT_STARTED,
+    NOT_STARTED, 
     IN_PROGRESS,
     STALEMATE,
     WON;

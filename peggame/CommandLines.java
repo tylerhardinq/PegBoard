@@ -34,8 +34,8 @@ public class CommandLines {
 
         //if the user enters hint it displays one possible move 
         if(input.trim().equals("hint")) {
-            System.out.println(game.getPossibleMoves().toArray()[0]);
-            // game.getPossibleMoves().stream().forEach(System.out::println); // Will print all the hints
+            // System.out.println(game.getPossibleMoves().toArray()[0]);
+            game.getPossibleMoves().stream().forEach(System.out::println); // Will print all the hints
         }
 
         //displays a goodbye message and ends the game

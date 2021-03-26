@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.platform.commons.annotation.Testable;
-
+//testing if two moves equal to each other
 @Testable
 public class MoveTest {
     
