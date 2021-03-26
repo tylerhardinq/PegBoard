@@ -98,7 +98,7 @@ public class Game implements PegGame{
         return false;
     }
 
-    public boolean isValid(Location loc) {
+    private boolean isValid(Location loc) {
         if(loc.getRow() < 0 || loc.getRow() >= board.getRows()) {
             return false;
         }

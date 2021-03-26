@@ -20,8 +20,8 @@ public class CommandLines {
         }
 
         if(input.trim().equals("hint")) {
-            System.out.println(game.getPossibleMoves().toArray()[0]);
-            // game.getPossibleMoves().stream().forEach(System.out::println); // Will print all the hints
+            // System.out.println(game.getPossibleMoves().toArray()[0]);
+            game.getPossibleMoves().stream().forEach(System.out::println); // Will print all the hints
         }
 
         if(input.trim().equals("quit")) {
