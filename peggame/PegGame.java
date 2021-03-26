@@ -12,6 +12,8 @@ public interface PegGame {
         throw new PegGameException("the method has not been implemented"); //default method of makeMove
     }
 
-    public PegGame deepCopy();
+    default PegGame deepCopy() {
+        throw new UnsupportedOperationException("not implemented");
+    }
     
 }
