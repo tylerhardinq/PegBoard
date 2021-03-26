@@ -5,23 +5,25 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import backtracker.Configuration;
+
 /**
  * This class contains methods to play the PegGame and 
  * checking the state of the board.
  * We seperated what we were told to do in CLI(Part6) into this class
  */
-public class Game implements PegGame{
+public class Game implements PegGame, Configuration{
     private Board board;
 
     /**
-     * @param boar Board that is going to be played on.
+     * @param board Board that is going to be played on.
      */
-    public Game(Board boar){
-        this.board = boar;
+    public Game(Board board){
+        this.board = board;
     }
 
     @Override
-    public PegGame deepCopy() {
+    public Game deepCopy() {
         return new Game(this.board);
     }
     
@@ -113,8 +115,8 @@ public class Game implements PegGame{
                 Location nextInnerLocation = new Location(nextInnerR, nextInnerC);
                 
                 //Checks if the locations are valid and adds it to the possible moves
-                if(isValid(nextOuterLocation) && hasPeg(nextOuterLocation)) {  
-                    if(isValid(nextInnerLocation) && hasPeg(nextInnerLocation)) {
+                if(locationIsValid(nextOuterLocation) && hasPeg(nextOuterLocation)) {  
+                    if(locationIsValid(nextInnerLocation) && hasPeg(nextInnerLocation)) {
                         Move move = new Move(nextOuterLocation, i);
                         possibleMoves.add(move);
                     }
@@ -145,14 +147,39 @@ public class Game implements PegGame{
      * @param loc location that is going ot be checked
      * @return
      */
-    public boolean isValid(Location loc) {
+    private boolean locationIsValid(Location loc) {
         if(loc.getRow() < 0 || loc.getRow() >= board.getRows()) {
             return false;
         }
         if(loc.getCol() < 0 || loc.getCol() >= board.getCols()) {
             return false;
         }
+
+
         return true;
+    }
+
+    @Override
+    public boolean isValid() {
+        return getPossibleMoves().size() > 0;
+    }
+
+    @Override
+    public boolean isGoal() {
+        return board.getState().equals(GameState.WON) && board.getTotalPeg() == 1;
+    }
+
+    @Override
+    public Collection<Configuration> getSuccessors() {
+        Collection<Configuration> successors = new LinkedList<>();
+        for(Move move : getPossibleMoves()) {
+            try {
+                Game gameCopy = deepCopy();
+                gameCopy.makeMove(move);
+                successors.add(gameCopy);
+            } catch (PegGameException e) {}
+        }
+        return successors;
     }
 
     /**
