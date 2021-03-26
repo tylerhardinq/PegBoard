@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class BoardFromFile {
     /**
-     * Reads a file from /data/ and makes a board with pegs and holes.
+     * Reads a file from /data/ and makes a board witWh pegs and holes.
      * Honestly, this is just in it's own class because the instructions specifically wanted it. 
      * I don't see why this isn't in the board class.
      * @param filename file from /data/
