@@ -6,7 +6,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 
-
+/**
+ * This class represents the board that is the underlying implementation for the game.
+ */
 public class Board {
 
     private final int rows;
@@ -16,6 +18,11 @@ public class Board {
     private int totalPeg; //total number of pigs on the board
     private GameState state; //The current state of the game
 
+    /**
+     * Constructor for the board
+     * @param rows Amount of rows.
+     * @param cols Amount of cols
+     */
     public Board(int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
@@ -26,6 +33,10 @@ public class Board {
         this.state = GameState.NOT_STARTED;
     }
 
+    /**
+     * Copy constructor. Will be useful for part 3 backtracking.
+     * @param template Takes in an existing board. 
+     */
     public Board(Board template) {
         this.rows = template.rows;
         this.cols = template.cols;
@@ -37,23 +48,33 @@ public class Board {
         
         this.moves = template.moves;
     }
-
-    public boolean moveValid(Move move){
-        return false;
-    }
    
+    /**
+     * 
+     * @return State of game from GameState enum
+     */
     public GameState getState() {
         return state;
     }
 
+    /**
+     * Adds a peg. Used when making the board from a file.
+     */
     public void addPeg() {
         this.totalPeg += 1;
     }
 
+    /**
+     * Removes a peg, called when making a move. 
+     */
     public void removePeg() {
         totalPeg--;
     }
 
+    /**
+     * 
+     * @return Total pegs
+     */
     public int getTotalPeg() {
         return totalPeg;
     }
@@ -77,6 +98,10 @@ public class Board {
         this.state = state;
     }
 
+    /**
+     * This was mostly used from the chessboard implementation from knight moves.
+     * Important to note that the array actually stores a '.' for the empty spots and is representated as '-'
+     */
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -99,6 +124,12 @@ public class Board {
         return builder.toString();
     }
 
+    /**
+     * Reads the provided data and creates a board. 
+     * @param filename 
+     * @return 
+     * @throws FileNotFoundException
+     */
     public static Board readFromFile(String filename) throws FileNotFoundException {
         FileReader fr = new FileReader(filename);
         BufferedReader br = new BufferedReader(fr);

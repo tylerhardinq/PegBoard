@@ -134,9 +134,6 @@ public class Game implements PegGame{
         return false;
     }
 
-<<<<<<< HEAD
-    private boolean isValid(Location loc) {
-=======
     /**
      * checks if a location is inside the board
      * 
@@ -144,7 +141,6 @@ public class Game implements PegGame{
      * @return
      */
     public boolean isValid(Location loc) {
->>>>>>> 4df94fbd9e671498e3ceef94ab0c99cd920f1c04
         if(loc.getRow() < 0 || loc.getRow() >= board.getRows()) {
             return false;
         }
