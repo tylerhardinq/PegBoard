@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Test;
 import org.junit.platform.commons.annotation.Testable;
-
+/**
+ * testing if locations equal to each other
+ */
 @Testable
 public class LocationTest {
     

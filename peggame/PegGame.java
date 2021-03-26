@@ -4,8 +4,8 @@ package peggame;
 import java.util.Collection;
 
 public interface PegGame {
-    Collection<Move> getPossibleMoves();//unimplemented method 1
-    GameState getGameState();//unimplemented method 2
+    Collection<Move> getPossibleMoves();//unimplemented getPossibleMoves method 
+    GameState getGameState();//unimplemented getGameState method 
 
 
     default void makeMove(Move move) throws PegGameException {
