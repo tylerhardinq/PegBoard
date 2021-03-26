@@ -23,13 +23,9 @@ public class Game implements PegGame, Configuration{
         this.board = board;
     }
 
-    public Game(Game game) {
-        this.board = game.board;
-    }
-
     @Override
     public Game deepCopy() {
-        return new Game(this.board);
+        return new Game(new Board(board));
     }
     
     /**
@@ -166,7 +162,7 @@ public class Game implements PegGame, Configuration{
 
     @Override
     public boolean isValid() {
-        return getPossibleMoves().size() > 0 && board.getTotalPeg() >= 1;
+        return getPossibleMoves().size() > 0;
     }
 
     @Override
@@ -179,9 +175,8 @@ public class Game implements PegGame, Configuration{
         Collection<Configuration> successors = new LinkedList<>();
         for(Move move : getPossibleMoves()) {
             try {
-                Game gameCopy = new Game(this.board);
+                Game gameCopy = deepCopy();
                 gameCopy.makeMove(move);
-                System.out.println("ooga booga" + "\n" + this.board);
                 successors.add(gameCopy);
             } catch (PegGameException e) {}
         }
@@ -207,13 +202,12 @@ public class Game implements PegGame, Configuration{
      * @throws PegGameException
      */
     public static void main(String[] args) throws FileNotFoundException, PegGameException {
-        Game game = new Game(BoardFromFile.readFromFile("data/4_4.txt"));
         // System.out.println(game.board);
         // System.out.println(game.getPossibleMoves());
         // game.makeMove(new Move(new Location(3,2), new Location(3,0)));
         // System.out.println(game.board);
         Backtracker backtracker = new Backtracker(true);
-        Game pGame= new Game(BoardFromFile.readFromFile("data/4_4.txt"));
+        Game pGame= new Game(BoardFromFile.readFromFile("data/3_3.txt"));
         Configuration solution = backtracker.solve(pGame);
         System.out.println(solution);
     }
