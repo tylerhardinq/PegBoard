@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import backtracker.Backtracker;
 import backtracker.Configuration;
 
 /**
@@ -20,6 +21,10 @@ public class Game implements PegGame, Configuration{
      */
     public Game(Board board){
         this.board = board;
+    }
+
+    public Game(Game game) {
+        this.board = game.board;
     }
 
     @Override
@@ -161,7 +166,7 @@ public class Game implements PegGame, Configuration{
 
     @Override
     public boolean isValid() {
-        return getPossibleMoves().size() > 0;
+        return getPossibleMoves().size() > 0 && board.getTotalPeg() >= 1;
     }
 
     @Override
@@ -174,8 +179,9 @@ public class Game implements PegGame, Configuration{
         Collection<Configuration> successors = new LinkedList<>();
         for(Move move : getPossibleMoves()) {
             try {
-                Game gameCopy = deepCopy();
+                Game gameCopy = new Game(this.board);
                 gameCopy.makeMove(move);
+                System.out.println("ooga booga" + "\n" + this.board);
                 successors.add(gameCopy);
             } catch (PegGameException e) {}
         }
@@ -189,6 +195,11 @@ public class Game implements PegGame, Configuration{
     public GameState getGameState() {
         return board.getState();
     }
+
+    @Override
+    public String toString() {
+        return board.toString();
+    }
     
     /**
      * Manual test of this class
@@ -196,11 +207,14 @@ public class Game implements PegGame, Configuration{
      * @throws PegGameException
      */
     public static void main(String[] args) throws FileNotFoundException, PegGameException {
-        new BoardFromFile();
         Game game = new Game(BoardFromFile.readFromFile("data/4_4.txt"));
-        System.out.println(game.board);
-        System.out.println(game.getPossibleMoves());
-        game.makeMove(new Move(new Location(3,2), new Location(3,0)));
-        System.out.println(game.board);
+        // System.out.println(game.board);
+        // System.out.println(game.getPossibleMoves());
+        // game.makeMove(new Move(new Location(3,2), new Location(3,0)));
+        // System.out.println(game.board);
+        Backtracker backtracker = new Backtracker(true);
+        Game pGame= new Game(BoardFromFile.readFromFile("data/4_4.txt"));
+        Configuration solution = backtracker.solve(pGame);
+        System.out.println(solution);
     }
 }
