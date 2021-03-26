@@ -135,7 +135,7 @@ public class Game implements PegGame, Configuration{
      * @param location location that is going to be checked
      * @return
      */
-    public boolean hasPeg(Location location) {
+    private boolean hasPeg(Location location) {
         if(board.board[location.getRow()][location.getCol()].equals("o")) {
             return true;
         }
@@ -162,12 +162,12 @@ public class Game implements PegGame, Configuration{
 
     @Override
     public boolean isValid() {
-        return getPossibleMoves().size() > 0;
+        return !board.getState().equals(GameState.STALEMATE);
     }
 
     @Override
     public boolean isGoal() {
-        return board.getState().equals(GameState.WON) && board.getTotalPeg() == 1;
+        return board.getState().equals(GameState.WON);
     }
 
     @Override
@@ -207,7 +207,7 @@ public class Game implements PegGame, Configuration{
         // game.makeMove(new Move(new Location(3,2), new Location(3,0)));
         // System.out.println(game.board);
         Backtracker backtracker = new Backtracker(true);
-        Game pGame= new Game(BoardFromFile.readFromFile("data/3_3.txt"));
+        Game pGame= new Game(BoardFromFile.readFromFile("data/1_4.txt"));
         Configuration solution = backtracker.solve(pGame);
         System.out.println(solution);
     }
