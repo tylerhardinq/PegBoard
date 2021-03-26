@@ -19,6 +19,11 @@ public class Game implements PegGame{
     public Game(Board boar){
         this.board = boar;
     }
+
+    @Override
+    public PegGame deepCopy() {
+        return new Game(this.board);
+    }
     
     /**
      * moves a peg on the board from and to a specified location.
