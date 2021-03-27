@@ -217,9 +217,8 @@ public class Game implements PegGame, Configuration{
         // System.out.println(game.getPossibleMoves());
         // game.makeMove(new Move(new Location(3,2), new Location(3,0)));
         // System.out.println(game.board);
-        Backtracker backtracker = new Backtracker(true);
+        
         Game pGame= new Game(BoardFromFile.readFromFile("data/4_4.txt"));
-        Configuration solution = backtracker.solve(pGame);
-        System.out.println(solution);
+        solve(pGame);
     }
 }
