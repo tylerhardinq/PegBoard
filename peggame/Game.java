@@ -191,6 +191,17 @@ public class Game implements PegGame, Configuration{
         return board.getState();
     }
 
+    public static void solve(Game game) {
+        Backtracker backtracker = new Backtracker(false);
+        Configuration solution = backtracker.solve(game);
+        if(solution != null) {
+            System.out.println(solution);
+        } else {
+            System.out.println("There is no solution to the given PegGame.");
+        }
+
+    }
+
     @Override
     public String toString() {
         return board.toString();
