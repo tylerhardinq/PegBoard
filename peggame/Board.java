@@ -27,7 +27,6 @@ public class Board {
         this.rows = rows;
         this.cols = cols;
         this.board = new String[rows][cols];
-        // board[0][0] = "-";
         moves = 0;
         this.totalPeg = 0;
         this.state = GameState.NOT_STARTED;
@@ -40,10 +39,9 @@ public class Board {
     public Board(Board template) {
         this.rows = template.rows;
         this.cols = template.cols;
-
         this.board = new String[rows][];
         for(int row=0; row<rows; row++) {
-            this.board[row] = Arrays.copyOf(template.board[row], rows);
+            this.board[row] = Arrays.copyOf(template.board[row], cols);
         }
         
         this.moves = template.moves;

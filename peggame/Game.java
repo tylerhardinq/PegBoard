@@ -1,19 +1,15 @@
 package peggame;
 
-import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-
-import backtracker.Backtracker;
-import backtracker.Configuration;
 
 /**
  * This class contains methods to play the PegGame and 
  * checking the state of the board.
  * We seperated what we were told to do in CLI(Part6) into this class
  */
-public class Game implements PegGame, Configuration{
+public class Game implements PegGame {
     private Board board;
 
     /**
@@ -25,7 +21,9 @@ public class Game implements PegGame, Configuration{
 
     @Override
     public Game deepCopy() {
-        return new Game(new Board(board));
+        Game newGame = new Game(new Board(board));
+        System.out.println(newGame);
+        return newGame;
     }
     
     /**
@@ -34,6 +32,7 @@ public class Game implements PegGame, Configuration{
      * 
      * @param move Contains Location from and to
      */
+
     @Override
     public void makeMove(Move move) throws PegGameException {
         if(getPossibleMoves().contains(move)){  //If the move is a valid move
@@ -92,6 +91,8 @@ public class Game implements PegGame, Configuration{
         
 
         //adding the location of empty holes
+        // System.out.println(board.getRows() + " " + board.getCols());
+        // System.out.println(board);
         if(board.getTotalPeg() != 1){
             for(int r = 0; r < board.getRows(); r++) {
                 for(int c = 0; c < board.getCols(); c++) {
@@ -160,29 +161,6 @@ public class Game implements PegGame, Configuration{
         return true;
     }
 
-    @Override
-    public boolean isValid() {
-        return board.getTotalPeg() >= 1 && (!board.getState().equals(GameState.STALEMATE));
-    }
-
-    @Override
-    public boolean isGoal() {
-        return board.getTotalPeg() == 1 && board.getState().equals(GameState.WON);
-    }
-
-    @Override
-    public Collection<Configuration> getSuccessors() {
-        Collection<Configuration> successors = new LinkedList<>();
-        for(Move move : getPossibleMoves()) {
-            try {
-                Game gameCopy = deepCopy();
-                gameCopy.makeMove(move);
-                successors.add(gameCopy);
-            } catch (PegGameException e) {}
-        }
-        return successors;
-    }
-
     /**
      * returns the current gamestate of the board
      */
@@ -191,34 +169,9 @@ public class Game implements PegGame, Configuration{
         return board.getState();
     }
 
-    public static void solve(Game game) {
-        Backtracker backtracker = new Backtracker(false);
-        Configuration solution = backtracker.solve(game);
-        if(solution != null) {
-            System.out.println(solution);
-        } else {
-            System.out.println("There is no solution to the given PegGame.");
-        }
-
-    }
-
     @Override
     public String toString() {
         return board.toString();
     }
     
-    /**
-     * Manual test of this class
-     * @throws FileNotFoundException
-     * @throws PegGameException
-     */
-    public static void main(String[] args) throws FileNotFoundException, PegGameException {
-        // System.out.println(game.board);
-        // System.out.println(game.getPossibleMoves());
-        // game.makeMove(new Move(new Location(3,2), new Location(3,0)));
-        // System.out.println(game.board);
-        
-        Game pGame= new Game(BoardFromFile.readFromFile("data/4_4.txt"));
-        solve(pGame);
-    }
 }
