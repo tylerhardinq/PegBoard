@@ -162,12 +162,12 @@ public class Game implements PegGame, Configuration{
 
     @Override
     public boolean isValid() {
-        return !board.getState().equals(GameState.STALEMATE);
+        return board.getTotalPeg() >= 1 && (!board.getState().equals(GameState.STALEMATE));
     }
 
     @Override
     public boolean isGoal() {
-        return board.getState().equals(GameState.WON);
+        return board.getTotalPeg() == 1 && board.getState().equals(GameState.WON);
     }
 
     @Override
@@ -207,7 +207,7 @@ public class Game implements PegGame, Configuration{
         // game.makeMove(new Move(new Location(3,2), new Location(3,0)));
         // System.out.println(game.board);
         Backtracker backtracker = new Backtracker(true);
-        Game pGame= new Game(BoardFromFile.readFromFile("data/1_4.txt"));
+        Game pGame= new Game(BoardFromFile.readFromFile("data/4_4.txt"));
         Configuration solution = backtracker.solve(pGame);
         System.out.println(solution);
     }

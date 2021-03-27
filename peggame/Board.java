@@ -47,6 +47,8 @@ public class Board {
         }
         
         this.moves = template.moves;
+        this.totalPeg = template.totalPeg;
+        this.state = template.state;
     }
    
     /**
