@@ -28,14 +28,34 @@ public class CommandLines {
             System.out.println("help - displays this message");
             System.out.println("move r1 c1 r2 c2 - attempts to move a peg from r1 c1 to r2 c2 on the board.");
             System.out.println("hint - displays an available move.");
+            System.out.println("solve - automatically solves the game.");
             System.out.println("quit - quits the game");
             System.out.println();
         }
 
-        //if the user enters hint it displays one possible move 
+        //if the user enters hint it displays one possible move that helps the user to win :)
         if(input.trim().equals("hint")) {
-            // System.out.println(game.getPossibleMoves().toArray()[0]);
-            game.getPossibleMoves().stream().forEach(System.out::println); // Will print all the hints
+            GameSolver solution = GameSolver.solve(game);
+            if(solution == null){
+                System.out.println("There is no solution :( ");
+            }
+            else{
+                System.out.println(solution.getMoves().get(0));
+            }
+        }
+ 
+        //if the user enters solve, it automaticaly solves the game and prints the winning game
+        if(input.trim().equals("solve")) {
+            GameSolver solution = GameSolver.solve(game);
+            System.out.println(" ↓↓  SOLUTION　↓↓　");
+            for(Move move : solution.getMoves()) {
+                System.out.println(move);
+                game.makeMove(move);
+                System.out.println(game);
+            }  
+            //ends the game
+            System.out.println("Game solved! Wow that was easy. Don't forget to like and subscribe :)" + "\n");
+            flag = false;
         }
 
         //displays a goodbye message and ends the game

@@ -22,7 +22,7 @@ public class Game implements PegGame {
     @Override
     public Game deepCopy() {
         Game newGame = new Game(new Board(board));
-        System.out.println(newGame);
+        // System.out.println(newGame);
         return newGame;
     }
     

@@ -44,7 +44,7 @@ public class GameSolver implements Configuration{
         for(Move move : game.getPossibleMoves()) {
             try {
                 Game gameCopy = game.deepCopy();
-                System.out.println(gameCopy);
+                // System.out.println(gameCopy);
                 List<Move> movesCopy = new ArrayList<>(moves);
                 movesCopy.add(move);
                 gameCopy.makeMove(move);
@@ -75,11 +75,12 @@ public class GameSolver implements Configuration{
     }
     
     public static void main(String[] args) throws FileNotFoundException, PegGameException {       
-        Game pGame= new Game(BoardFromFile.readFromFile("data/1_4.txt"));
+        Game pGame= new Game(BoardFromFile.readFromFile("data/4_4.txt"));
         GameSolver gamesolver = solve(pGame);
-        for(Move move : gamesolver.getMoves()) {
-            System.out.println(move);
-        }
+        System.out.println(     gamesolver.getMoves().get(0));
+        // for(Move move : gamesolver.getMoves()) {
+        //     System.out.println(move);
+        // }
 
     }
 }
