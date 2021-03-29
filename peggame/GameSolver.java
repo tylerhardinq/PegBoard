@@ -17,12 +17,12 @@ public class GameSolver implements Configuration{
     private Game game;
     private List<Move> moves = new ArrayList<>();
 
-  
+    //constructor
     public GameSolver(Game game, List<Move> moves){
         this.game = game;
         this.moves = moves;
     }
-
+    //constructor override
     public GameSolver(Game game) {
         this.game = game;
         this.moves = new ArrayList<>();
@@ -40,15 +40,21 @@ public class GameSolver implements Configuration{
 
     @Override
     public Collection<Configuration> getSuccessors() {
+        //make a new array lsit
         Collection<Configuration> successors = new ArrayList<>();
         for(Move move : game.getPossibleMoves()) {
+            //for any possible moves in the get moves
             try {
+                //creates an empty deep copy
                 Game gameCopy = game.deepCopy();
                 // System.out.println(gameCopy);
                 List<Move> movesCopy = new ArrayList<>(moves);
                 movesCopy.add(move);
+                //add a move to the copy
                 gameCopy.makeMove(move);
+                //move the peg in the game copy
                 successors.add(new GameSolver(gameCopy, movesCopy));
+                //add it to the successor
             } catch (PegGameException e) {
                 System.out.println(e);
             }
@@ -57,7 +63,7 @@ public class GameSolver implements Configuration{
     }
 
 
-
+    //the solve method
     public static GameSolver solve(Game game) {
         GameSolver solver = new GameSolver(game);
         Backtracker backtracker = new Backtracker(false);
