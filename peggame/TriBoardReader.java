@@ -54,8 +54,8 @@ public class TriBoardReader {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        Board b = TriBoardReader.readFromFile("project-team-1-main/data2/3.txt");
+        TriBoard b = TriBoardReader.readFromFile("data2/5.txt");
         System.out.println(b);
-        System.out.println(b.board[2][0]);
+
     }
 }
