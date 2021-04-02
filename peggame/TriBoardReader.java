@@ -14,7 +14,7 @@ public class TriBoardReader {
      * @return Filled board.
      * @throws FileNotFoundException
      */
-    public static TriBoard readFromFile(String filename) throws FileNotFoundException {
+    public static PegGame readFromFile(String filename) throws FileNotFoundException {
         FileReader fr = new FileReader(filename);
         BufferedReader br = new BufferedReader(fr);
         try {
@@ -41,7 +41,8 @@ public class TriBoardReader {
                     }
                 }
                 br.close();
-                return filledBoard;
+                TriGame result = new TriGame(filledBoard);
+                return result;
             }
 
         }
@@ -54,8 +55,8 @@ public class TriBoardReader {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        TriBoard b = TriBoardReader.readFromFile("data2/5.txt");
-        System.out.println(b);
+        // TriBoard b = TriBoardReader.readFromFile("data2/5.txt");
+        // System.out.println(b);
 
     }
 }

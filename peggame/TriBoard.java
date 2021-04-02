@@ -1,9 +1,6 @@
 package peggame;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Arrays;
 
 /**
@@ -51,7 +48,9 @@ public class TriBoard {
         this.totalPeg = template.totalPeg;
         this.state = template.state;
     }
-   
+   public String[][] getBoard() {
+       return board;
+   }
     /**
      * 
      * @return State of game from GameState enum
@@ -95,6 +94,14 @@ public class TriBoard {
 
     public void addMove() {
         moves++;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public int getCols() {
+        return cols;
     }
 
     public void setState(GameState state) {
@@ -146,6 +153,10 @@ public class TriBoard {
     public static void main(String[] args) throws FileNotFoundException {
         // Board board = new Board(4, 4);
         // board.makeMove(5, 7);
+        // TriBoard template = TriBoardReader.readFromFile("data2/5.txt");
+        // TriBoard b = new TriBoard(template);
+        // System.out.println(b);
+        // System.out.println(template);
 
 
     }
