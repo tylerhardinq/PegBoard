@@ -108,7 +108,7 @@ public class Board {
         for(int row=0; row<rows; row++) {
             for(int col=0; col<cols; col++) {
                 builder.append("[");
-                if(board[row][col].equals(".")){
+                if(board[row][col].equals("-")){
                     builder.append("-"); 
                 }
                 else{

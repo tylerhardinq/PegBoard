@@ -42,8 +42,11 @@ public class BoardFromFile {
                         //add each element
                         if(tokens[c].equals("o")) {
                             filledBoard.addPeg();
+                            filledBoard.board[r][c] = "o" ;
                         }
-                        filledBoard.board[r][c] = tokens[c] ;
+                        else{
+                            filledBoard.board[r][c] = "-" ;
+                        }
                     }
                 }
                 br.close();
