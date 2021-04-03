@@ -19,7 +19,7 @@ public class CommandLines {
 
         //Contantly prompts the user to enter a command
         while(flag) {
-        System.out.println(game.getBoard());
+        System.out.println(game);
         System.out.print(">> ");
         String input = sc.nextLine();
 
@@ -80,13 +80,13 @@ public class CommandLines {
             } catch (PegGameException yeah) {
                 System.out.println("Invalid move! Try using 'hint'");
             }
-            if(game.getBoard().getState() == GameState.STALEMATE) {
-                System.out.println(game.getBoard());
+            if(game.getGameState() == GameState.STALEMATE) {
+                System.out.println(game);
                 System.out.println();
                 System.out.println("lol you lose.");
                 flag = false;
-            } else if(game.getBoard().getState() == GameState.WON) {
-                System.out.println(game.getBoard());
+            } else if(game.getGameState() == GameState.WON) {
+                System.out.println(game);
                 System.out.println();
                 System.out.println("GG");
                 flag = false;

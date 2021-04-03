@@ -37,6 +37,7 @@ public class TriBoardReader {
                         }
                         else{
                             filledBoard.board[rowCounter][i] = ("o");
+                            filledBoard.addPeg();
                         }
                     }
                     rowCounter++;

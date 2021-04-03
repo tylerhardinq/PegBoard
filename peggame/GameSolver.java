@@ -64,7 +64,7 @@ public class GameSolver implements Configuration{
 
 
     //the solve method
-    public static GameSolver solve(Game game) {
+    public static GameSolver solve(PegGame game) {
         GameSolver solver = new GameSolver(game);
         Backtracker backtracker = new Backtracker(false);
         Configuration solution = backtracker.solve(solver);
