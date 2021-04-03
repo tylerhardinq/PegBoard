@@ -37,7 +37,7 @@ public class Game implements PegGame {
     public void makeMove(Move move) throws PegGameException {
         if(getPossibleMoves().contains(move)){  //If the move is a valid move
             board.board[move.getTo().getRow()][move.getTo().getCol()] = "o";     //The To gets a peg
-            board.board[move.getFrom().getRow()][move.getFrom().getCol()] = ".";  //The peg in the from is removed
+            board.board[move.getFrom().getRow()][move.getFrom().getCol()] = "-";  //The peg in the from is removed
 
             //Finding location in the middle
             int x1 = move.getFrom().getRow();
@@ -46,7 +46,7 @@ public class Game implements PegGame {
             int y2 = move.getTo().getCol();
             int x = (x1+x2)/2;
             int y = (y1+y2)/2;
-            board.board[x][y] = ".";
+            board.board[x][y] = "-";
             board.addMove();  //Increments the number of move made
             board.removePeg();  //removes one peg from the totalPegs on the board
 
@@ -96,7 +96,7 @@ public class Game implements PegGame {
         if(board.getTotalPeg() != 1){
             for(int r = 0; r < board.getRows(); r++) {
                 for(int c = 0; c < board.getCols(); c++) {
-                   if(board.board[r][c].equals(".")){
+                   if(board.board[r][c].equals("-")){
                         To.add(new Location(r, c));
                    }
                 }

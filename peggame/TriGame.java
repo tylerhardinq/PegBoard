@@ -19,6 +19,8 @@ public class TriGame implements PegGame {
         this.board = board;
     }
 
+    
+
     @Override
     public PegGame deepCopy() {
         PegGame newGame = new TriGame(new TriBoard(board));
@@ -26,6 +28,7 @@ public class TriGame implements PegGame {
         return newGame;
     }
     
+
     /**
      * moves a peg on the board from and to a specified location.
      * peg is removed from the from location and moved to the to location.

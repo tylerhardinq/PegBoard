@@ -13,7 +13,7 @@ public class CommandLines {
      * @param game takes in the new started game
      * @throws PegGameException
      */
-    public static void CLI(Game game) throws PegGameException {
+    public static void CLI(PegGame game) throws PegGameException {
         Scanner sc = new Scanner(System.in);
         boolean flag = true;
 

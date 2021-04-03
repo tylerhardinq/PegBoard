@@ -14,16 +14,16 @@ import backtracker.Configuration;
  * We seperated what we were told to do in CLI(Part6) into this class
  */
 public class GameSolver implements Configuration{
-    private Game game;
+    private PegGame game;
     private List<Move> moves = new ArrayList<>();
 
     //constructor
-    public GameSolver(Game game, List<Move> moves){
-        this.game = game;
+    public GameSolver(PegGame gameCopy, List<Move> moves){
+        this.game = gameCopy;
         this.moves = moves;
     }
     //constructor override
-    public GameSolver(Game game) {
+    public GameSolver(PegGame game) {
         this.game = game;
         this.moves = new ArrayList<>();
     }
@@ -46,7 +46,7 @@ public class GameSolver implements Configuration{
             //for any possible moves in the get moves
             try {
                 //creates an empty deep copy
-                Game gameCopy = game.deepCopy();
+                PegGame gameCopy = game.deepCopy();
                 // System.out.println(gameCopy);
                 List<Move> movesCopy = new ArrayList<>(moves);
                 movesCopy.add(move);
