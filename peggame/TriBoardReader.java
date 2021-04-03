@@ -14,47 +14,8 @@ public class TriBoardReader {
      * @return Filled board.
      * @throws FileNotFoundException
      */
-    // public static TriBoard readFromFile(String filename) throws FileNotFoundException {
-    //     FileReader fr = new FileReader(filename);
-    //     BufferedReader br = new BufferedReader(fr);
-    //     try {
-    //         int size;
-    //         //If row and col is different
-    //         size = Integer.parseInt(br.readLine());        
-    //         //Create new board
-    //         TriBoard filledBoard = new TriBoard(size);
-    //         String line = "";
-    //         while(line != null) {
-    //             for (int i = 0; i < size; i++) {
-    //                 line = br.readLine();
-    //                 String[] tokens =line.split("");
-    //                 for (int space = 0; space < size; space++) {
-    //                     filledBoard.board[i][space] = (" ");
-    //                 }
-    //                 for (int j = 0; j < i+1; j++) {
-    //                     if(tokens[j].equals(".")){
-    //                         filledBoard.board[i][j] = ("-");
-    //                     }
-    //                     else{
-    //                         filledBoard.board[i][j] = ("o");
-    //                     }
-    //                 }
-    //             }
-    //             br.close();
 
-    //             return filledBoard;
-    //         }
-
-    //     }
-
-    //     catch (IOException ioe) {
-    //         System.out.println(ioe);
-    //     }
-    //     return null;
-
-    // }
-
-    public static TriBoard readFromFile(String filename) throws FileNotFoundException {
+    public static TriGame readFromFile(String filename) throws FileNotFoundException {
         FileReader fr = new FileReader(filename);
         BufferedReader br = new BufferedReader(fr);
         try {
@@ -81,8 +42,8 @@ public class TriBoardReader {
                     rowCounter++;
                 }
                 br.close();
-
-                return filledBoard;
+                TriGame triGame = new TriGame(filledBoard);
+                return triGame;
             }
 
         catch (IOException ioe) {
@@ -93,7 +54,7 @@ public class TriBoardReader {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        TriBoard b = TriBoardReader.readFromFile("data2/5.txt");
+        TriGame b = TriBoardReader.readFromFile("data2/5.txt");
         System.out.println(b);
 
     }

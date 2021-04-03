@@ -155,9 +155,6 @@ public class TriBoard {
         
         // System.out.println(template);
 
-        TriBoard board = TriBoardReader.readFromFile("data2/5.txt");
-        TriBoard copy = new TriBoard(board);
-        for(String[] row : copy.getBoard()) {System.out.println(Arrays.toString(row));}
         // System.out.println(copy);
         
 

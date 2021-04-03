@@ -9,7 +9,7 @@ public class Project3Main{
         System.out.print("Give me a file: "); // the question
         String fileName = sc.nextLine();
 
-        PegGame aGame =  TriBoardReader.readFromFile(fileName);;//create a new board from the given file
+        TriBoard aGame =  TriBoardReader.readFromFile(fileName);;//create a new board from the given file
         CommandLines.CLI(aGame);//using the command line to play the game
         sc.close();
     }

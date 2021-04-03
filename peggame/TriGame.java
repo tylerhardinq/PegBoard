@@ -1,5 +1,6 @@
 package peggame;
 
+import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -40,7 +41,7 @@ public class TriGame implements PegGame {
     public void makeMove(Move move) throws PegGameException {
         if(getPossibleMoves().contains(move)){  //If the move is a valid move
             board.board[move.getTo().getRow()][move.getTo().getCol()] = "o";     //The To gets a peg
-            board.board[move.getFrom().getRow()][move.getFrom().getCol()] = ".";  //The peg in the from is removed
+            board.board[move.getFrom().getRow()][move.getFrom().getCol()] = "-";  //The peg in the from is removed
 
             //Finding location in the middle
             int x1 = move.getFrom().getRow();
@@ -49,7 +50,7 @@ public class TriGame implements PegGame {
             int y2 = move.getTo().getCol();
             int x = (x1+x2)/2;
             int y = (y1+y2)/2;
-            board.board[x][y] = ".";
+            board.board[x][y] = "-";
             board.addMove();  //Increments the number of move made
             board.removePeg();  //removes one peg from the totalPegs on the board
 
@@ -98,7 +99,7 @@ public class TriGame implements PegGame {
         // System.out.println(board);
         if(board.getTotalPeg() != 1){
             for(int r = 0; r < board.getRows(); r++) {
-                for(int c = 0; c < board.getCols(); c++) {
+                for(int c = 0; c < board.board[r].length; c++) {
                    if(board.board[r][c].equals("-")){
                         To.add(new Location(r, c));
                    }
@@ -156,7 +157,7 @@ public class TriGame implements PegGame {
         if(loc.getRow() < 0 || loc.getRow() >= board.getRows()) {
             return false;
         }
-        if(loc.getCol() < 0 || loc.getCol() >= board.getCols()) {
+        if(loc.getCol() < 0 || loc.getCol() >= board.board[loc.getRow()].length) {
             return false;
         }
 
@@ -175,6 +176,24 @@ public class TriGame implements PegGame {
     @Override
     public String toString() {
         return board.toString();
+    }
+
+    public static void main(String[] args) {
+        try {
+            TriGame aGame = TriBoardReader.readFromFile("data2/5.txt");
+            System.out.println(aGame.getPossibleMoves());
+            aGame.makeMove(new Move(new Location(2, 0), new Location(0, 0)));
+            System.out.println(aGame);
+            System.out.println(aGame.getPossibleMoves());
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (PegGameException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        
     }
     
 }
