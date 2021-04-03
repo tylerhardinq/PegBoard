@@ -88,10 +88,14 @@ public class TriGame implements PegGame {
         List<Location> To = new LinkedList<>();  //list of empty holes which will be the to location
         //inner is the possible location between the from and to
         //outer is the possible from location
-        int[] innerRow = {0, 1, 1,  1,  0, -1, -1, -1};
-        int[] innerCol = {1, 1, 0, -1, -1, -1,  0,  1};
-        int[] outerRow = {0, 2, 2, 2,   0, -2, -2, -2};
-        int[] outerCol = {2, 2, 0, -2, -2, -2,  0,  2};
+        // int[] innerRow = {0, 1, 1,  1,  0, -1, -1, -1};
+        // int[] innerCol = {1, 1, 0, -1, -1, -1,  0,  1};
+        // int[] outerRow = {0, 2, 2, 2,   0, -2, -2, -2};
+        // int[] outerCol = {2, 2, 0, -2, -2, -2,  0,  2};
+        int[] innerRow = {0, 1, 1,  0, -1, -1};
+        int[] innerCol = {1, 1, 0, -1, -1,  0};
+        int[] outerRow = {0, 2, 2,  0, -2, -2};
+        int[] outerCol = {2, 2, 0, -2, -2,  0};
         
 
         //adding the location of empty holes

@@ -42,20 +42,26 @@ public class CommandLines {
             else{
                 System.out.println(solution.getMoves().get(0));
             }
+            
+            
         }
  
         //if the user enters solve, it automaticaly solves the game and prints the winning game
         if(input.trim().equals("solve")) {
             GameSolver solution = GameSolver.solve(game);
-            System.out.println(" ↓↓  SOLUTION　↓↓　");
+            if(solution == null) {
+                System.out.println("This game is unwinnable. Have a nice day.");
+            }
+            else { System.out.println(" ↓↓  SOLUTION　↓↓　");
             for(Move move : solution.getMoves()) {
                 System.out.println(move);
                 game.makeMove(move);
                 System.out.println(game);
-            }  
-            //ends the game
+            }
             System.out.println("Game solved! Wow that was easy. Don't forget to like and subscribe :)" + "\n");
             flag = false;
+        } 
+            
         }
 
         //displays a goodbye message and ends the game
