@@ -9,8 +9,8 @@ import java.util.Arrays;
 public class TriBoard {
 
     private final int rows;
-    private final int cols;
-    private final int size;
+    // removed cols, we only work with rows in triangles. 
+    // removed size, because rows and cols will be the same thing
     protected String[][] board;
     private int moves;   //total moves
     private int totalPeg; //total number of pigs on the board
@@ -23,9 +23,10 @@ public class TriBoard {
      */
     public TriBoard(int size) {
         this.rows = size;
-        this.cols = size;
-        this.size = size;
-        this.board = new String[rows][cols];
+        this.board = new String[rows][];
+        for(int i = 0; i < rows; i++) {
+            board[i] = new String[i+1];
+        }
         moves = 0;
         this.totalPeg = 0;
         this.state = GameState.NOT_STARTED;
@@ -36,12 +37,10 @@ public class TriBoard {
      * @param template Takes in an existing board. 
      */
     public TriBoard(TriBoard template) {
-        this.size = template.size;
-        this.rows = template.size;
-        this.cols = template.size;
+        this.rows = template.rows;
         this.board = new String[rows][];
         for(int row=0; row<rows; row++) {
-            this.board[row] = Arrays.copyOf(template.board[row], cols);
+            this.board[row] = Arrays.copyOf(template.board[row], template.board[row].length);
         }
         
         this.moves = template.moves;
@@ -100,9 +99,6 @@ public class TriBoard {
         return rows;
     }
 
-    public int getCols() {
-        return cols;
-    }
 
     public void setState(GameState state) {
         this.state = state;
@@ -115,8 +111,8 @@ public class TriBoard {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < size; i++) {
-            for (int space = 0; space < size - i; space++) {
+        for (int i = 0; i < rows; i++) {
+            for (int space = 0; space < rows - i; space++) {
                 builder.append(" ");
             }
             for (int j = 0; j < i+1; j++) {
@@ -154,9 +150,16 @@ public class TriBoard {
         // Board board = new Board(4, 4);
         // board.makeMove(5, 7);
         // TriBoard template = TriBoardReader.readFromFile("data2/5.txt");
-        // TriBoard b = new TriBoard(template);
-        // System.out.println(b);
+        // String[][] b = new TriBoard(template).getBoard();
+        // for (String[] row : b) {System.out.println(Arrays.toString(row));}
+        
         // System.out.println(template);
+
+        TriBoard board = TriBoardReader.readFromFile("data2/5.txt");
+        TriBoard copy = new TriBoard(board);
+        for(String[] row : copy.getBoard()) {System.out.println(Arrays.toString(row));}
+        // System.out.println(copy);
+        
 
 
     }
